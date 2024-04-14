@@ -1,0 +1,23 @@
+.navbar a {
+  color: yellow;
+}
+
+.navbar a:hover {
+  color: white;
+}
+
+.subscribe-button {
+  background-color: red;
+  text-transform: uppercase;
+}
+.subscribe-button::after {
+  content: attr(data-text);
+}
+
+.btn1 {
+  background-color: red;
+  text-transform: uppercase;
+}
+.btn1::after {
+  content: attr(data-text);
+}/*# sourceMappingURL=style1.css.map */

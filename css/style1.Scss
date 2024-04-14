@@ -1,0 +1,36 @@
+$navbarTextColor: yellow;
+$navbarTextColorHover: white;
+$subscribeBtnColor: red;
+$subscribeBtnText: uppercase;
+
+.navbar a {
+  color: $navbarTextColor;
+}
+
+.navbar a:hover {
+  color: $navbarTextColorHover;
+}
+
+.subscribe-button {
+  background-color: $subscribeBtnColor;
+  text-transform: $subscribeBtnText;
+  &::after {
+    content: attr(data-text); // Add content from data-text attribute
+  }
+  
+}
+
+.btn1{
+  background-color: $subscribeBtnColor;
+
+  text-transform: $subscribeBtnText;
+  &::after {
+    content: attr(data-text); // Add content from data-text attribute
+  }
+  
+}
+
+
+
+
+
