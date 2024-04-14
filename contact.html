@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Contact Us Page</title>
+  <link rel="stylesheet" href="css/contact.css" />
+  <link rel="stylesheet" href="css/style2.css" />
+  <script src="contact.js"></script>
+</head>
+
+<body>
+
+  <div class="contactUs">
+    <div class="title">
+      <h2>Get in Touch</h2>
+    </div>
+    <div class="box">
+      <div class="contact form">
+        <h3>Send a Message</h3>
+        <div id="error_message"></div>
+        <form id="myForm">
+          <div class="formBox">
+            <div class="row50">
+              <div class="inputBox">
+                <span>First Name</span>
+                <input type="text" placeholder="First Name" id="firstName" onchange="return fNameValidation()"
+                  name="First-Name" required />
+              </div>
+              <div class="inputBox">
+                <span>Last Name</span>
+                <input type="text" placeholder="Last Name" id="lastName" onchange="return lNameValidation()"
+                  name="Last-Name" required />
+              </div>
+            </div>
+
+            <div class="row50">
+              <div class="inputBox">
+                <span>Email</span>
+                <input type="text" placeholder="username@email.com" id="uEmail" onchange="return emailValidation()"
+                  name="Email" required />
+              </div>
+              <div class="inputBox">
+                <span>Mobile</span>
+                <input type="text" placeholder="Phone Number" id="uPhone" onchange="return phoneValidation()"
+                  name="Contact" required />
+              </div>
+            </div>
+
+            <div class="row100">
+              <div class="inputBox">
+                <span>Date</span>
+                <input type="text" placeholder="Date(dd/mm/yy)" id="Date" onchange="return dateValidation()" name="Date"
+                  required />
+              </div>
+              <div class="inputBox">
+                <span>Message</span>
+                <textarea placeholder="Write your message here..." id="uMsg" onchange="return msgValidation()"
+                  name="Message" required></textarea>
+              </div>
+            </div>
+
+            <div class="row100">
+              <div class="inputBox">
+                <input type="submit" value="Send" />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="contact info">
+        <h3>Contact Info</h3>
+        <div class="infoBox">
+          <div>
+            <span><ion-icon name="location"></ion-icon></span>
+            <p>
+              Toronto, Ontario <br />
+              CANADA
+            </p>
+          </div>
+          <div>
+            <span><ion-icon name="mail"></ion-icon></span>
+            <a href="mailto:abc82@gmail.com">abc82@gmail.com</a>
+          </div>
+          <div>
+            <span><ion-icon name="call"></ion-icon></span>
+            <a href="tel:+1 437 661 0408">+1 (437) 234 7777</a>
+          </div>
+          <ul class="sci">
+            <li>
+              <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+            </li>
+            <li>
+              <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+            </li>
+            <li>
+              <a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
+            </li>
+            <li>
+              <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="contact map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d184531.69394825026!2d-79.7595439!3d43.724934000000026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b15eaa5d05abf%3A0x352d31667cc38677!2sBrampton%2C%20ON!5e0!3m2!1sen!2sca!4v1711780221652!5m2!1sen!2sca"
+          style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <script>
+
+document.getElementById('myForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+      sendEmail(); // Call the function to send email
+      submitFormspree(); // Call the function to submit the form to Formspree
+      
+    });
+
+    function sendEmail() {
+      Email.send({
+        SecureToken: "892486fd-81cb-49a7-9b6f-364c0aace9c02",
+        To: 'gautamajayarora7@gmail.com',
+        From: 'gautamajayarora7@gmail.com',
+        Subject: "New Query",
+        Body: "Date: " + document.getElementById("Date").value
+          + "<br> Name:" + document.getElementById("firstName").value + document.getElementById("lastName").value
+          + "<br> Email: " + document.getElementById("uEmail").value
+          + "<br> Phone Number : " + document.getElementById("uPhone").value
+          + "<br> Message : " + document.getElementById("uMsg").value
+
+      }).then(
+        message => alert("Message sent successfully")
+      );
+    }
+
+    function submitFormspree() {
+      fetch('https://formspree.io/f/xayrlnae', {
+        method: 'POST',
+        body: new FormData(document.getElementById('myForm')),
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          alert("Message sent successfully");
+          document.getElementById('myForm').reset(); // Reset the form after successful submission
+        } else {
+          throw new Error('Network response was not ok.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert("An error occurred while sending your message. Please try again later.");
+      });
+    }
+
+  </script>
+</body>
+
+</html>
